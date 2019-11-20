@@ -50,20 +50,23 @@ public class ProcesadorYodafy {
 	    // Lee la frase a Yodaficar:
 	    ////////////////////////////////////////////////////////
 	    // read ... datosRecibidos.. (Completar)
+	    bytesRecibidos = inputStream.read(datosRecibidos); 
 	    ////////////////////////////////////////////////////////
 			
 	    // Yoda hace su magia:
 	    // Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
 	    String peticion=new String(datosRecibidos,0,bytesRecibidos);
+	    //System.out.println("El dato leído es " + peticion);
 	    // Yoda reinterpreta el mensaje:
 	    String respuesta=yodaDo(peticion);
 	    // Convertimos el String de respuesta en una array de bytes:
+	    //System.out.println("La respuesta que bamso a dar es " + respuesta);
 	    datosEnviar=respuesta.getBytes();
 			
 	    // Enviamos la traducción de Yoda:
 	    ////////////////////////////////////////////////////////
 	    outputStream.write(datosEnviar, 0, datosEnviar.length); 
-	    // ... write ... datosEnviar... datosEnviar.length ... (Completar)
+	    
 	    ////////////////////////////////////////////////////////
 			
 			

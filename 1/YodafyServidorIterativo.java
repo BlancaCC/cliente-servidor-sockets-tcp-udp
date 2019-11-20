@@ -20,40 +20,37 @@ public class YodafyServidorIterativo {
 	//int bytesLeidos=0;
 
 	
-		
-		
+	       		
+	// Abrimos el socket en modo pasivo, escuchando el en puerto indicado por "port"
+	ServerSocket  socketServidor = null ;
 	try {
-	    // Abrimos el socket en modo pasivo, escuchando el en puerto indicado por "port"
-	    ServerSocket  socketServidor = null ;
+	    socketServidor = new ServerSocket(port);
+	} catch (IOException e){
+	    System.err.println("Error no se pudo abrir el puerto "+port +"\n");
+	}
+				    
+	do {
+
+	    // Aceptamos una nueva conexión con accept()
+	    Socket socketConexion = null;
 	    try {
-		socketServidor = new ServerSocket(port);
-	    } catch (IOException e){
-		System.err.println("Error no se pudo abrir el puerto "+port +"\n");
+		socketConexion = socketServidor.accept();
+	    }  catch (IOException e){
+		System.err.println("Error: no se pudo aceptar la conexión solicitada");
 	    }
-		
-
-		    
-	    do {
-
-		// Aceptamos una nueva conexión con accept()
-		Socket socketConexion = socketServidor.accept();
 						
-		// Creamos un objeto de la clase ProcesadorYodafy, pasándole como 
-		// argumento el nuevo socket, para que realice el procesamiento
-		// Este esquema permite que se puedan usar hebras más fácilmente.
-		//ProcesadorYodafy procesador=new ProcesadorYodafy(socketServidor);
-		ProcesadorYodafy procesador=new ProcesadorYodafy(socketConexion);
-		procesador.procesa();
+	    // Creamos un objeto de la clase ProcesadorYodafy, pasándole como 
+	    // argumento el nuevo socket, para que realice el procesamiento
+	    // Este esquema permite que se puedan usar hebras más fácilmente.
+	    //ProcesadorYodafy procesador=new ProcesadorYodafy(socketServidor);
+	    ProcesadorYodafy procesador=new ProcesadorYodafy(socketConexion);
+	    procesador.procesa();
 		
 				
-	    } while (true);
-			
-	} catch (IOException e) {
-	    System.err.println("Error al escuchar en el puerto "+port);
-	}
-
+	} while (true);
+	
     }
 
-    //socketServidor.close();
+    //socketServidor.close();		
 
 }

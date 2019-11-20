@@ -28,7 +28,7 @@ public class YodafyClienteTCP {
 	Socket socketServicio=null;
 		
 	try {
-	    // Creamos un socket que se conecte a "hist" y "port":
+	    // Creamos un socket que se conecte a "host" y "port":
 	    //////////////////////////////////////////////////////
 
 	    try {
@@ -39,9 +39,7 @@ public class YodafyClienteTCP {
 		System.err.println( "Error: no se pudo establecer la conexion");
 	    }
 	    
-		// socketServicio= ... (Completar)
-		//////////////////////////////////////////////////////			
-			
+	    //obtenemos flujo de lectura y de escritura para el socket
 	    InputStream inputStream = socketServicio.getInputStream();
 	    OutputStream outputStream = socketServicio.getOutputStream();
 			
@@ -50,14 +48,9 @@ public class YodafyClienteTCP {
 	    buferEnvio="Al monte del volcan debes ir sin demora".getBytes();
 			
 	    // Enviamos el array por el outputStream;
-	    //////////////////////////////////////////////////////
-	    // ... .write ... (Completar)
-	    //borrarbyte [] buferEnvio = "Hola, funciona, porfi".getBytes();
+	    
 	    outputStream.write(buferEnvio, 0, buferEnvio.length); //el 0 indica el desplazamiento
 
-	    //buferRecepcion = new byte[256];
-
-	    bytesLeidos = inputStream.read(buferRecepcion); 
 	    //////////////////////////////////////////////////////
 			
 	    // Aunque le indiquemos a TCP que queremos enviar varios arrays de bytes, sólo
@@ -68,9 +61,8 @@ public class YodafyClienteTCP {
 	    //////////////////////////////////////////////////////
 			
 	    // Leemos la respuesta del servidor. Para ello le pasamos un array de bytes, que intentará
-	    // rellenar. El método "read(...)" devolverá el número de bytes leídos.
-	    //////////////////////////////////////////////////////
-	    bytesLeidos = inputStream.read(buferRecepcion);
+	    System.out.println("Esperando respuesta ...");
+		bytesLeidos = inputStream.read(buferRecepcion);
 	    // bytesLeidos ... .read... buferRecepcion ; (Completar)
 	    //////////////////////////////////////////////////////
 			
@@ -81,9 +73,7 @@ public class YodafyClienteTCP {
 	    }
 			
 	    // Una vez terminado el servicio, cerramos el socket (automáticamente se cierran
-	    // el inpuStream  y el outputStream)
-	    //////////////////////////////////////////////////////
-	    // ... close(); (Completar)
+
 	    socketServicio.close(); 	
 	    //////////////////////////////////////////////////////
 	    
