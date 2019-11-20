@@ -10,6 +10,14 @@
 
 # Seminario Tor  
 
+
+## Qué es lo que busca tor
+
+No se puedan rastrear paquetes para llegar hasta el usuario (su dirección ip)
+, como efecto colateral es más difícil vigilar y censurar el contenido. 
+
+### Porqué la red que utilizamos normalmente no funciona   
+Protocolos de nivel superior y otras características: cookies, plugins java, flash, 
 ## Preliminares  
 
 ### Web superficial  
@@ -73,7 +81,7 @@ Aquí la clave de cifrado, la existencia de un sercidor proxy con imposibilidad 
  
  un modo de encaminamiento, lo que hacemos es transmitir mensajes con distintas capas de cifrado (por ese ligero parecido resultante y coincidente con ése interior enrollado del bulbo con un diagrama de la explicación de su viaje, a éstas redes se les conoce como 'de cebolla') sobre un camino compuesto por nodos de mezclado (mixes) convertidos ahora en routers (router de cebolla) donde cada router del camino lo que hace es descifrar ('pela' una capa de la cebolla), transmitir y reordenar los mensajes antes de transmitir al siguiente router. 
  
-Ideas esenciales:
+Ideas esenciales:  PROXY APLICACIÓN -> ONION PROXY ->(entry funnel) ONION ROUTER -> ... -> ONION RUTER (exit funnel) -> mensaje a destino 
 
 - Emisor origen -> proxy aplicación : (homogenizaciín protocolo router) 
 - proxy aplicación->[mensajes] -> onion proxy Nodo OP  (ruta destino estrucutra de datos al que enciar el siguiente nodo OPNIOS FORWARD : Cifra con su clave pública 
@@ -113,33 +121,9 @@ ESK_4(ESK_3(ESK_4(datos_respuesta)))
 Tor servicio directorio: autoridades confiabkes que publican: routers activos, direcciones, clave públicas
 
 ## ¿Siempre se decide la misma ruta?  
-Cambiar parcialment e la topología del circuito: Leakhy-pipe circuit topology:  permiten salida del circuito usando nodo intermedio: frustra ataques que se basen en atacar el último nodo. 
+Cambiar parcialment e la  PROXY APLICACIÓN -> ONION PROXY ->(entry funnel) ONION OROUTER -> ... -> ONION RUTER (exit funnel) -> mensaje a destino topología del circuito: Leakhy-pipe circuit topology:  permiten salida del circuiwall de red. SOCKS es una abreviación de "SOCKetS". to usando nodo intermedio: frustra ataques que se basen en atacar el último nodo. 
 
 
-
-
-
---- (mirar wikipedia)
-    El emisor origen de la comunicación establece una conexión de inicialización con un proxy de aplicación (en inglés Application Proxy) que convierte los mensajes del protocolo específico de la aplicación a un formato genérico que pueda ser manejado por los routers.
-    A continuación el proxy de aplicación envía los mensajes a un Onion Proxy (se le suele llamar nodo OP), el cual decide la ruta hacia el destino y construye la estructura de datos que se va a enviar al siguiente nodo y a la que se llama onion ('cebolla' en inglés) o onion forward ('cebolla hacia adelante', para indicar el sentido de la comunicación). La estructura de datos tiene una capa cifrada por cada router que vaya a formar parte del circuito.
-
-    Si E P K ( ⟨ d a t o s ⟩ ) {\displaystyle E_{PK}({\rm {\langle datos\rangle )}}} {\displaystyle E_{PK}({\rm {\langle datos\rangle )}}} representa el cifrado usando la clave pública PK, D S K ( ⟨ d a t o s ⟩ ) {\displaystyle D_{SK}({\rm {\langle datos\rangle )}}} {\displaystyle D_{SK}({\rm {\langle datos\rangle )}}} representa el descifrado usando la clave privada y el onion proxy inicial decide que se va a usar la ruta <4,3,5> de routers, entonces el paquete que se envía al siguiente router puede ser representado por:
-
-        E P K 4 ( direcciónderouter 3 , E P K 3 ( direcciónderouter 5 , E P K 5 ( ⟨ d a t o s ⟩ ) ) ) {\displaystyle E_{PK_{4}}({\mbox{direcciónderouter}}_{3},E_{PK_{3}}({\mbox{direcciónderouter}}_{5},E_{PK_{5}}({\rm {\langle datos\rangle )))}}} {\displaystyle E_{PK_{4}}({\mbox{direcciónderouter}}_{3},E_{PK_{3}}({\mbox{direcciónderouter}}_{5},E_{PK_{5}}({\rm {\langle datos\rangle )))}}}.
-
-    La estructura de datos es enviada por el onion proxy a el entry funnel (punto de entrada al canal). El cual es un onion router (nodo OR) usado como punto de entrada a la red de encaminadores de la red cebolla. Este router descifra el paquete (pela su capa de la 'cebolla') y obtiene la dirección del siguiente nodo OR en el camino del mensaje.
-    A continuación el entry funnel coge el resto del mensaje y lo manda al siguiente onion router.
-    Así se continúa hasta llegar al onion router que actúa como nodo de salida al que llama exit funnel. Este nodo descifra y obtiene el mensaje que originalmente produjo el proxy de aplicación. Este mensaje se envía a la dirección destino especificada.
-    Cuando el receptor envía una respuesta a un mensaje particular, el exit funnel lo convierte al protocolo genérico, lo cifra con su clave privada y lo envía de vuelta al onion router del que le vino el mensaje original.
-    Cada onion router opera de forma similar cifrando la respuesta y lo envía de vuelta obteniendo una estructura de datos, a la que se llama reply onion o onion forward, que tiene la siguiente estructura:
-
-        E S K 4 ( E S K 3 ( E S K 5 ( ⟨ d a t o s ⟩ ) ) ) {\displaystyle E_{SK_{4}}(E_{SK_{3}}(E_{SK_{5}}({\rm {\langle datos\rangle )))}}} {\displaystyle E_{SK_{4}}(E_{SK_{3}}(E_{SK_{5}}({\rm {\langle datos\rangle )))}}}
-
-    El mensaje llega al onion proxy el cual descifra usando las claves públicas de los onion routers que escogió como camino del mensaje original.
----
-
-
-Los datos es civada por un onion proxi al entry funnel un onion router  OR. 
 
 
 
