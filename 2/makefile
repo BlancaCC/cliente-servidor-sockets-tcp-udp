@@ -1,5 +1,5 @@
 all:
-YodafyServidorIterativo.class: YodafyServidorIterativo.java
+YodafyServidorIterativo.class: YodafyServidorIterativo.java ProcesadorYodafy.java
 	javac YodafyServidorIterativo.java
 
 YodafyClienteTCP.class: YodafyClienteTCP.java

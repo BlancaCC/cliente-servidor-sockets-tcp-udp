@@ -7,8 +7,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Random;
-
-
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.InputStreamReader;
 //
 // Nota: si esta clase extendiera la clase Thread, y el procesamiento lo hiciera el método "run()",
 // ¡Podríamos realizar un procesado concurrente! 
@@ -43,36 +44,29 @@ public class ProcesadorYodafy {
 		
 		
 	try {
-	    // Obtiene los flujos de escritura/lectura
-	    inputStream=socketServicio.getInputStream();
-	    outputStream=socketServicio.getOutputStream();
-			
-	    // Lee la frase a Yodaficar:
-	    ////////////////////////////////////////////////////////
-	    // read ... datosRecibidos.. (Completar)
-	    //  bytesRecibidos = inputStream.read(datosRecibidos);
+	    // Obtiene los flujos de escritura/lectura y encapsulamos en onjeto de flujo 
+
+	    PrintWriter outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
 	    BufferedReader inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
 
-	    PrintWriter outPrinter = new PrintWriter(socketServicio.getOutStream(), true);
-	    ////////////////////////////////////////////////////////
+	    
+	    // Lee la frase a Yodaficar:
+	  
+	     String peticion = inReader.readLine();
+
 			
 	    // Yoda hace su magia:
-	    // Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
-	    String peticion = inReader.readLine();					 
-	    //String peticion=new String(datosRecibidos,0,bytesRecibidos);
-	    //System.out.println("El dato leído es " + peticion);
-	    // Yoda reinterpreta el mensaje:
-	    String respuesta=yodaDo(peticion);
-	    // Convertimos el String de respuesta en una array de bytes:
-	    //System.out.println("La respuesta que bamso a dar es " + respuesta);
-	    //datosEnviar=respuesta.getBytes();
-			
-	    // Enviamos la traducción de Yoda:
-	    ////////////////////////////////////////////////////////
-	    outputStream.write(datosEnviar, 0, datosEnviar.length); 
 	    
-	    ////////////////////////////////////////////////////////
-			
+	    String respuesta=yodaDo(peticion);
+		
+	    // Enviamos la traducción de Yoda:
+
+	    outPrinter.print(respuesta);
+	    outPrinter.flush();
+
+
+	    outPrinter.close();
+	    inReader.close();
 			
 			
 	} catch (IOException e) {

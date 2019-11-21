@@ -15,9 +15,6 @@ public class YodafyClienteTCP {
 
     public static void main(String[] args) {
 		
-	byte []buferEnvio;
-	byte []buferRecepcion=new byte[256];
-	int bytesLeidos=0;
 		
 	// Nombre del host donde se ejecuta el servidor:
 	String host="localhost";
@@ -40,40 +37,32 @@ public class YodafyClienteTCP {
 	    }
 	    
 	    //obtenemos flujo de lectura y de escritura para el socket
-	    InputStream inputStream = socketServicio.getInputStream();
-	    OutputStream outputStream = socketServicio.getOutputStream();
+	    // y lo introudcimos en objetos de control de flujo
+	    
+	    PrintWriter outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
+	    BufferedReader inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
 			
 	    // Si queremos enviar una cadena de caracteres por un OutputStream, hay que pasarla primero
-	    // a un array de bytes:
-	    buferEnvio="Al monte del volcan debes ir sin demora".getBytes();
-			
-	    // Enviamos el array por el outputStream;
-	    
-	    outputStream.write(buferEnvio, 0, buferEnvio.length); //el 0 indica el desplazamiento
 
-	    //////////////////////////////////////////////////////
-			
-	    // Aunque le indiquemos a TCP que queremos enviar varios arrays de bytes, sólo
-	    // los enviará efectivamente cuando considere que tiene suficientes datos que enviar...
-	    // Podemos usar "flush()" para obligar a TCP a que no espere para hacer el envío:
-	    //////////////////////////////////////////////////////
-	    outputStream.flush();
-	    //////////////////////////////////////////////////////
-			
-	    // Leemos la respuesta del servidor. Para ello le pasamos un array de bytes, que intentará
-	    System.out.println("Esperando respuesta ...");
-		bytesLeidos = inputStream.read(buferRecepcion);
-	    // bytesLeidos ... .read... buferRecepcion ; (Completar)
-	    //////////////////////////////////////////////////////
-			
-	    // MOstremos la cadena de caracteres recibidos:
-	    System.out.println("Recibido: ");
-	    for(int i=0;i<bytesLeidos;i++){
-		System.out.print((char)buferRecepcion[i]);
-	    }
-			
+	    String bufferEnvio = "Al monte del volcan debes ir sin demora";
+	    // Enviamos el array por el outputStream;
+
+	    outPrinter.println(bufferEnvio);
+	    outPrinter.flush();
+
+	
+	    // Leemos la respuesta del servidor. 
+	    String bufferRecepcion = inReader.readLine(); 
+
+	  
+	    // Mstremos el string recibido  recibidos:
+	    System.out.println("Recibido: \n" + bufferRecepcion);
+
+	
 	    // Una vez terminado el servicio, cerramos el socket (automáticamente se cierran
 
+	    outPrinter.close();
+	    inReader.close();
 	    socketServicio.close(); 	
 	    //////////////////////////////////////////////////////
 	    
