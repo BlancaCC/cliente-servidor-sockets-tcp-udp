@@ -47,7 +47,8 @@ public class ProcesadorYodafy {
 	    //recibir datos
 	    paquete = new DatagramPacket(datosRecibidos, datosRecibidos.length);
 	    socket.receive(paquete);
-	    paquete.getData();
+	    datosRecibidos = paquete.getData();
+	    bytesRecibidos = paquete.getLength(); 
 	    direccion = paquete.getAddress();
 	    port = paquete.getPort();
 	    // fin de recibir paquete 
@@ -68,15 +69,15 @@ public class ProcesadorYodafy {
 	    paquete = new DatagramPacket(datosEnviar, datosEnviar.length,
 					 direccion, port);
 	    socket.send(paquete); 
-	    
+
+	    socket.close(); 
 	    ////////////////////////////////////////////////////////
 			
 			
 			
 	} catch (IOException e) {
-	    System.err.println("Error al obtener los flujo de entrada/salida.");
+	    System.err.println("Error al obtener los flujo de entrada/salida. en Procesador yodify");
 	}
-	socket.close(); // no se cierra para poder seguir recibiendo más mensajes :D
 
     }
 

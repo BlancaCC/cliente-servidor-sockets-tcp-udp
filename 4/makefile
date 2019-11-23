@@ -2,15 +2,15 @@ all:
 YodafyServidorIterativo.class: YodafyServidorIterativo.java
 	javac YodafyServidorIterativo.java
 
-YodafyClienteTCP.class: YodafyClienteTCP.java
-	javac YodafyClienteTCP.java
+YodafyClienteUDP.class: YodafyClienteUDP.java
+	javac YodafyClienteUDP.java
 
 servidor: YodafyServidorIterativo.class
 	java YodafyServidorIterativo
 
 
-cliente: YodafyClienteTCP.class
-	java YodafyClienteTCP
+cliente: YodafyClienteUDP.class
+	java YodafyClienteUDP
 
 
 clear:

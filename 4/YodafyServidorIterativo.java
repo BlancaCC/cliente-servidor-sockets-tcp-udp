@@ -14,13 +14,13 @@ public class YodafyServidorIterativo {
 	int port=8989;	       		
 	// Abrimos el socket en modo pasivo, escuchando el en puerto indicado por "port"
 	DatagramSocket  socketServidor = null ;
-	try {
-	    socketServidor = new DatagramSocket(port);
-	} catch (IOException e){
-	    System.err.println("Error no se pudo abrir el puerto "+port +"\n");
-	}			    
-	do {
-
+	do{
+	    try {
+		socketServidor = new DatagramSocket(port);
+	    } catch (IOException e){
+		System.err.println("Error no se pudo abrir el puerto "+port +"\n");
+	    }			    
+	
 	    
 	    ProcesadorYodafy procesador=new ProcesadorYodafy(socketServidor);
 	    procesador.procesa();
@@ -29,8 +29,6 @@ public class YodafyServidorIterativo {
 	} while (true);
 	// socket.close(); ya lo cerramos en el ProcesadorYodify
 	
-    }
-
+    }   
     
-
 }

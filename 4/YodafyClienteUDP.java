@@ -9,7 +9,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress; 
 import java.net.UnknownHostException;
 
-public class YodafyClienteTCP {
+public class YodafyClienteUDP {
 
     public static void main(String[] args) {
 		
@@ -39,16 +39,20 @@ public class YodafyClienteTCP {
 	    //recibimos mensaje yodificado
 	    paquete = new DatagramPacket(buferRecepcion, buferRecepcion.length);
 	    socket.receive(paquete);
-	    //	paquete.getData();
+	    buferRecepcion = paquete.getData();
+	    bytesLeidos = paquete.getLength(); 
 	    //paquete.getAddress();
+	    
 	    //paquete.getport();
 
 	    // MOstremos la cadena de caracteres recibidos:
 	    System.out.println("Recibido: ");
+	    System.out.println(new String(buferRecepcion, 0,buferRecepcion.length));  
+	    /**
 	    for(int i=0;i<buferRecepcion.length;i++){
 		System.out.print((char)buferRecepcion[i]);
 	    }
-			
+	    */		
 	    socket.close(); // cerramso la conexión
 
 	// Excepciones:
