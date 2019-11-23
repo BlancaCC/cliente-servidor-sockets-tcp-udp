@@ -60,7 +60,7 @@ public class MemProcessor extends Thread {
 		    break;
 		case "login":
 		    if(Login()){
-			System.out.println("En proceso de crear protocolo escritura");
+			Write();
 		    }
 		    break;
 		    
@@ -130,5 +130,17 @@ public class MemProcessor extends Thread {
 	    System.err.println("Stream object can't be used"); 
 	}
     }
+
+    private void Write(){
+	try{
+	    String ms =inReader.readLine();
+	    m.addContent(ms);
+	} catch(IOException e) {
+	    System.err.println("Stream object can't be used"); 
+	}
+
+	
+    }
     
 }
+

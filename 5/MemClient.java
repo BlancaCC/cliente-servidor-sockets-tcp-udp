@@ -76,11 +76,12 @@ public class MemClient {
 
     // ------ messages ----- 
 
-    private static String ms0 = "--- Wellcome to short memories manager:--- \n"+
+    private static String ms0 = "\n====== Wellcome to short memories manager= ===== \n"+
 "What do you want to do? (Enter the number): \n" +
 "1) login \n" +
 "2) register\n" +
 "3) exit... :(  \n" +
+	"================== "+
 "Option: ";
 
 
@@ -120,7 +121,7 @@ public class MemClient {
 		outPrinter.flush();
 
 		String ms = inReader.readLine();
-		System.out.println("Server answer:" +  ms);
+		//System.out.println("Server answer:" +  ms);
 		if("OK".equals(ms))
 		    askName = false;
 		else
@@ -186,14 +187,10 @@ public class MemClient {
     public static void Write(){
 	try{
 	    //send title
-	    System.out.print("title: ");
+	    System.out.print("Write the line you want to post: ");
 	    outPrinter.println(stdin.readLine());
 	    outPrinter.flush();
-
-	    //send password
-	    System.out.println("write ms to store: ");
-	    outPrinter.println(stdin.readLine());
-	    outPrinter.flush();
+	    
 	} catch(IOException e) {
 	    System.err.println("Stream object can't be used"); 
 	}
@@ -211,7 +208,7 @@ public class MemClient {
 	    switch( menu0()){
 	    case 1:
 		if(Login()) {
-		    System.out.println("En proceso de crear protocolo escritura");
+		    Write();
 		}
 		    
 		break;

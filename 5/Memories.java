@@ -7,7 +7,7 @@ public class Memories {
     private String user =""; //user to asociate contents
     
     //contents
-    private static HashMap<String, Set<String>> content =
+    private static HashMap<String, HashSet<String>> content =
 	new HashMap<String, HashSet <String> >(); 
 
 
@@ -22,7 +22,8 @@ public class Memories {
     }
 
     public void addUser(String name, String pass){
-	users.put(name,pass); 
+	users.put(name,pass);
+	content.put(name, new HashSet<String>());
     }
 
     public boolean correctPassword(String name, String pw){
@@ -31,8 +32,10 @@ public class Memories {
     }
 
     public void addContent(String ms){
-	content.get(user)).add(ms);
+	System.out.println(user + ": " + ms); 
+	(content.get(user)).add(ms);
     }
+
 
     
 }
