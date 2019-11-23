@@ -1,6 +1,6 @@
 MemClient.class: MemClient.java
 	javac MemClient.java
-MemServidor.class: MemServidor.java MemProcessor.java
+MemServidor.class: MemServidor.java MemProcessor.java Memories.java
 	javac MemServidor.java
 
 cliente: MemClient.class

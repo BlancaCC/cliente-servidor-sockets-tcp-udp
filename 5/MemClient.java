@@ -99,52 +99,82 @@ public class MemClient {
 	return ret; 
     }
 
-    private static void register() {
+    private static void Register() {
 	boolean askName = true;
-	String name;
+	String name = "";
 
 	//register protocol
 	try{
-	    outPrinter.print("register");
+
+	    // init protocol
+	    outPrinter.flush();
+	    outPrinter.println("register");
 	    outPrinter.flush(); 
 
-	    System.out.print("ha recibido?:" + inReader.readLine() );
+	    // new user name
+	    System.out.println( inReader.readLine() );
 	    while(askName){
-		System.out.println("User: ");
 		name = stdin.readLine();
 	    
-		outPrinter.print(name);
+		outPrinter.println(name);
+		outPrinter.flush();
 
-		System.out.println("La respuesta del servidor es: ");
 		String ms = inReader.readLine();
-		System.out.println("ya se ha léído es " + ms);
-		askName = false; 
+		System.out.println("Server answer:" +  ms);
+		if("OK".equals(ms))
+		    askName = false;
+		else
+		    System.out.println("This name has already exists\nTry again:  ");
+		    
 	    }
+
+	    // add a user password
+	    System.out.print("Write a password: ");
+	    outPrinter.println(stdin.readLine());
+	    outPrinter.flush();
+
+	    //end message
+	    System.out.println(name + " has create a new count");
+	    
+	    
 	}catch(IOException e){
 	    System.err.println("Error in stream"); 
 	}
 	
     }
 
+    private static void Exit(){
+	
+	outPrinter.println("exit");
+	outPrinter.flush();
+	in = false;
+
+    }
+    /**
+    private static Login(){
+    }
+    */
     public static void main(String[] args) {
 
 
 	//init connection 
 	init(); 
 
+
 	while (in){
 	    switch( menu0()){
 	    case 2: //register
-		register(); 
+		Register();
+		
 		break; 
 	    case 3:
 	    default:
-		in = false; 
+		Exit();
 	    }
 	    
 	}
 
-
+	
 	//close connection and input 
 	close(); 
 

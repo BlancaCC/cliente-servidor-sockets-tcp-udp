@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 
 public class MemProcessor extends Thread {
 
+
     private Socket socket;      //referenced socket
     
     //communication streams 
@@ -25,11 +26,12 @@ public class MemProcessor extends Thread {
     private PrintWriter outPrinter;
     private BufferedReader inReader; 
     
-
+    private Memories m;
 
     //constructor
-    public MemProcessor(Socket socket) {
-	this.socket = socket; 
+    public MemProcessor(Socket socket, Memories m) {
+	this.socket = socket;
+	this.m = m; 
     }
 
     private void initStream() {
@@ -44,27 +46,27 @@ public class MemProcessor extends Thread {
     //paralell process
     public void run() {
 	initStream();
-	
+	Boolean in = true;
+
 	try {
-	    
-	    String  peticion = inReader.readLine();
-	    System.out.println(petition); 
-	    switch (peticion) {
-	    default:
-
-		outPrinter.print("ok register: ¿cómo se llama?");
-		outPrinter.flush();
-	
-		name = inReader.readLine();		 
-		System.out.print("ha accedido "+ ms);
-
-		
-		outPrinter.print("hi "+ms);
-		outPrinter.flush();
-	    }
-
-
-	    
+	    //
+	    while(in){
+		String  petition = inReader.readLine();
+		System.out.println("Hemos recibido la petición " + petition);
+	     
+		switch (petition) {
+		case "register":
+		    Register();
+		    break;
+		case "exit":
+		    in = false;
+		break;
+		default:
+		    outPrinter.println("Petición no en protocolo");
+		    outPrinter.flush();
+		}
+	    } //while 
+	   
 	    outPrinter.close();
 	    inReader.close();
 	} catch(IOException e) {
@@ -72,6 +74,34 @@ public class MemProcessor extends Thread {
 	}
     }
 
-    
+
+
+    private  void Register() {
+
+	try {
+	    outPrinter.println("ok register; wait for you user");
+	    outPrinter.flush();
+
+	    //ask for a name until it doesn't exist
+	    String name = inReader.readLine();
+	    while( m.userExists(name)){
+		outPrinter.println("no");
+		outPrinter.flush();
+		name = inReader.readLine();
+	    }
+	    outPrinter.println("OK");
+	   
+	    //ask for a password
+	    String password = inReader.readLine();
+
+	    //add user and password
+	    m.addUser(name, password);
+	    System.out.println("New user: "+ name +
+			       " Password: " + password);
+
+	} catch(IOException e) {
+	    System.err.println("Stream object can't be used"); 
+	}
+    }
     
 }

@@ -13,8 +13,8 @@ import java.net.Socket;
 public class MemServidor {
 
     public static void main(String[] args){
+	
 	int port = 7777;
-
 	//open server socker in pasive mode 
 	ServerSocket serverSocket = null;
 
@@ -35,8 +35,8 @@ public class MemServidor {
 	    } catch(IOException e){
 		System.err.println("Error: New request can NOT be accepted"); 
 	    }
-
-	    MemProcessor process = new MemProcessor(socketConnection);
+	    
+	    MemProcessor process = new MemProcessor(socketConnection,new Memories() );
 	    process.start(); 
 
 	    //process close socketConnection
