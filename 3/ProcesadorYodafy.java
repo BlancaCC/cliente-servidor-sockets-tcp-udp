@@ -63,7 +63,7 @@ public class ProcesadorYodafy  extends Thread {
 			
 			
 	} catch (IOException e) {
-	    System.err.println("Error al obtener los flujso de entrada/salida.");
+	    System.err.println("Error al obtener los flujo de entrada/salida.");
 	}
 
     }
