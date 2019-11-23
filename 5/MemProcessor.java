@@ -58,6 +58,12 @@ public class MemProcessor extends Thread {
 		case "register":
 		    Register();
 		    break;
+		case "login":
+		    if(Login()){
+			System.out.println("En proceso de crear protocolo escritura");
+		    }
+		    break;
+		    
 		case "exit":
 		    in = false;
 		break;
@@ -75,7 +81,28 @@ public class MemProcessor extends Thread {
     }
 
 
+    private boolean Login(){
+	boolean ret = false;
+	try{
+	    String name = inReader.readLine();
+	    String password = inReader.readLine();
+	
+	     ret = m.correctPassword(name, password);
+	
+	    String answer = "NO";
+	    if(ret)
+		answer = "OK";
 
+	    outPrinter.println(answer);
+	    outPrinter.flush();
+
+	} catch(IOException e) {
+	    System.err.println("Stream object can't be used"); 
+	}
+	    
+	return ret;
+
+    }
     private  void Register() {
 
 	try {

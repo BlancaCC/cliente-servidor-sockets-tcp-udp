@@ -150,10 +150,56 @@ public class MemClient {
 	in = false;
 
     }
-    /**
-    private static Login(){
+    
+    private static Boolean Login(){
+	boolean ret = false;
+	try{
+	    //init protocol
+	    outPrinter.println("login");
+	    outPrinter.flush();
+
+	    //send name
+	    System.out.print("User: ");
+	    outPrinter.println(stdin.readLine());
+	    outPrinter.flush();
+
+	    //send password
+	    System.out.print("password: ");
+	    outPrinter.println(stdin.readLine());
+	    outPrinter.flush();
+
+	    //are they correct?
+	    if(inReader.readLine().equals("OK")){
+		ret = true;
+		System.out.println("Login success");
+	    }
+	    else
+		System.out.println("Not valid user or password");
+	    
+	} catch(IOException e) {
+	    System.err.println("Stream object can't be used"); 
+	}
+	
+	return ret;
     }
-    */
+
+    public static void Write(){
+	try{
+	    //send title
+	    System.out.print("title: ");
+	    outPrinter.println(stdin.readLine());
+	    outPrinter.flush();
+
+	    //send password
+	    System.out.println("write ms to store: ");
+	    outPrinter.println(stdin.readLine());
+	    outPrinter.flush();
+	} catch(IOException e) {
+	    System.err.println("Stream object can't be used"); 
+	}
+
+    }
+    
     public static void main(String[] args) {
 
 
@@ -163,6 +209,12 @@ public class MemClient {
 
 	while (in){
 	    switch( menu0()){
+	    case 1:
+		if(Login()) {
+		    System.out.println("En proceso de crear protocolo escritura");
+		}
+		    
+		break;
 	    case 2: //register
 		Register();
 		
