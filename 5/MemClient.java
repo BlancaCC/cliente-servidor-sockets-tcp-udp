@@ -76,13 +76,14 @@ public class MemClient {
 
     // ------ messages ----- 
 
-    private static String ms0 = "\n====== Wellcome to short memories manager= ===== \n"+
-"What do you want to do? (Enter the number): \n" +
-"1) login \n" +
-"2) register\n" +
-"3) exit... :(  \n" +
+    private static String ms0 = "\n====== Wellcome to short memories manager====== \n"+
+	"What do you want to do? (Enter the number): \n" +
+	"1) login \n" +
+	"2) register\n" +
+	"3) stalkear someone\n"+
+	"4) exit... :(  \n" +
 	"================== "+
-"Option: ";
+	"Option: ";
 
 
     private static int menu0() {
@@ -184,6 +185,34 @@ public class MemClient {
 	return ret;
     }
 
+    private static void Stalkear(){
+	try{
+	//init protocol
+	    outPrinter.println("stalkear");
+	    outPrinter.flush();
+
+	    //send name
+	    System.out.print("User to stalkear: ");
+	    outPrinter.println(stdin.readLine());
+	    outPrinter.flush();
+
+	    //are they correct? read it history
+	    if((inReader.readLine()).equals("OK")){
+		String ms = inReader.readLine();
+		while(!ms.equals("FIN7777")){
+		    System.out.println(ms);
+		    ms = inReader.readLine();
+		    }
+		
+	    }
+	    else
+		System.out.println("Not valid user");
+	    
+	} catch(IOException e) {
+	    System.err.println("Stream object can't be used"); 
+	}
+    }
+
     public static void Write(){
 	try{
 	    //send title
@@ -217,6 +246,9 @@ public class MemClient {
 		
 		break; 
 	    case 3:
+		Stalkear();
+		break;
+	    case 4:
 	    default:
 		Exit();
 	    }

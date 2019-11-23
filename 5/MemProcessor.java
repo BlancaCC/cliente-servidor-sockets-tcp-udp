@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.InputStreamReader;
 
+import java.util.HashSet;
+
 
 public class MemProcessor extends Thread {
 
@@ -57,6 +59,9 @@ public class MemProcessor extends Thread {
 		switch (petition) {
 		case "register":
 		    Register();
+		    break;
+		case "stalkear":
+		    Stalkear();
 		    break;
 		case "login":
 		    if(Login()){
@@ -137,10 +142,29 @@ public class MemProcessor extends Thread {
 	    m.addContent(ms);
 	} catch(IOException e) {
 	    System.err.println("Stream object can't be used"); 
-	}
-
-	
+	}	
     }
+
+    private void Stalkear(){
+	try{
+	    //wait for user name
+	    String name = inReader.readLine();
+	    if( m.userExists(name)){
+		outPrinter.println("OK");		
+		outPrinter.println("All content of" + name );
+		for(String i : m.Stalkear(name)){
+		    outPrinter.println(i);
+		}
+		outPrinter.println("FIN7777");
+	    }
+	    else
+		outPrinter.println(name + " is not an existed user");
+	    
+	} catch(IOException e) {
+	    System.err.println("Stream object can't be used"); 
+	}
+    }
+    
     
 }
 
