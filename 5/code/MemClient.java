@@ -126,7 +126,7 @@ public class MemClient {
 		if("OK".equals(ms))
 		    askName = false;
 		else
-		    System.out.println("This name has already exists\nTry again:  ");
+		    System.out.println("This name already exists\nTry again:  ");
 		    
 	    }
 

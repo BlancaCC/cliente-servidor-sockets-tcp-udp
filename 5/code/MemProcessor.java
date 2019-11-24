@@ -54,7 +54,7 @@ public class MemProcessor extends Thread {
 	    //
 	    while(in){
 		String  petition = inReader.readLine();
-		System.out.println("Hemos recibido la petición " + petition);
+		System.out.println("New petition " + petition);
 	     
 		switch (petition) {
 		case "register":
@@ -111,7 +111,7 @@ public class MemProcessor extends Thread {
     private  void Register() {
 
 	try {
-	    outPrinter.println("Taps your user name");
+	    outPrinter.println("Type your user name");
 	    outPrinter.flush();
 
 	    //ask for a name until it doesn't exist
@@ -151,7 +151,7 @@ public class MemProcessor extends Thread {
 	    String name = inReader.readLine();
 	    if( m.userExists(name)){
 		outPrinter.println("OK");		
-		outPrinter.println("All content of" + name );
+		outPrinter.println("All content of " + name );
 
 		HashSet<String> set = m.Stalkear(name);
 		Iterator i = set.iterator();
