@@ -9,5 +9,5 @@ cliente: MemClient.class
 servidor: MemServidor.class
 	java MemServidor
 
-clear:
+clean:
 	rm *~ *.class

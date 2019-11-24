@@ -96,7 +96,7 @@ public class MemClient {
         // This method reads the number provided using keyboard
         ret = scan.nextInt();
 	
-	} while( ret>3 || ret<1 );
+	} while( ret>4 || ret<1 );
 	
 	return ret; 
     }
@@ -232,25 +232,26 @@ public class MemClient {
 	//init connection 
 	init(); 
 
-
 	while (in){
 	    switch( menu0()){
-	    case 1:
-		if(Login()) {
-		    Write();
-		}
-		    
-		break;
-	    case 2: //register
-		Register();
-		
-		break; 
-	    case 3:
-		Stalkear();
-		break;
-	    case 4:
-	    default:
-		Exit();
+			case 1:
+				if(Login()) {
+					Write();
+				}
+				break;
+			
+			case 2: //register
+				Register();
+				break; 
+			
+			case 3:
+				Stalkear();
+				break;
+			
+			case 4:
+			
+			default:
+				Exit();
 	    }
 	    
 	}
