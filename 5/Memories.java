@@ -36,13 +36,8 @@ public class Memories {
 	(content.get(user)).add(ms);
     }
 
-    public String Stalkear(String name){
-	String ret ="";
-	for( String i : (content.get(name))){
-	    ret += i + "\n";
-	    System.out.println(i);
-	}
-	return ret;
+    public HashSet<String> Stalkear(String name){
+	return content.get(name);
     }
 
 

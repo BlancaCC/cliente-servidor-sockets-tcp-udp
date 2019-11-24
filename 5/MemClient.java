@@ -76,12 +76,12 @@ public class MemClient {
 
     // ------ messages ----- 
 
-    private static String ms0 = "\n====== Wellcome to short memories manager====== \n"+
+    private static String ms0 = "\n====== Wellcome to short memories manager ====== \n"+
 	"What do you want to do? (Enter the number): \n" +
-	"1) login \n" +
-	"2) register\n" +
-	"3) stalkear someone\n"+
-	"4) exit... :(  \n" +
+	"1) Login \n" +
+	"2) Register\n" +
+	"3) Stalkear someone\n"+
+	"4) Exit   :(  \n" +
 	"================== "+
 	"Option: ";
 

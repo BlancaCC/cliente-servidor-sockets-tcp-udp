@@ -13,8 +13,8 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.InputStreamReader;
 
+import java.util.Iterator; 
 import java.util.HashSet;
-
 
 public class MemProcessor extends Thread {
 
@@ -111,7 +111,7 @@ public class MemProcessor extends Thread {
     private  void Register() {
 
 	try {
-	    outPrinter.println("ok register; wait for you user");
+	    outPrinter.println("Taps your user name");
 	    outPrinter.flush();
 
 	    //ask for a name until it doesn't exist
@@ -152,8 +152,13 @@ public class MemProcessor extends Thread {
 	    if( m.userExists(name)){
 		outPrinter.println("OK");		
 		outPrinter.println("All content of" + name );
-		for(String i : m.Stalkear(name)){
-		    outPrinter.println(i);
+
+		HashSet<String> set = m.Stalkear(name);
+		Iterator i = set.iterator();
+		
+		while(i.hasNext()){
+	       
+		    outPrinter.println(i.next());
 		}
 		outPrinter.println("FIN7777");
 	    }
