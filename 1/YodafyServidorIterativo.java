@@ -50,7 +50,4 @@ public class YodafyServidorIterativo {
 	} while (true);
 	
     }
-
-    //socketServidor.close();		
-
 }

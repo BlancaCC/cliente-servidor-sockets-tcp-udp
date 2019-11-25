@@ -27,7 +27,6 @@ public class YodafyServidorIterativo {
 	    	
 				
 	} while (true);
-	// socket.close(); ya lo cerramos en el ProcesadorYodify
 	
     }   
     

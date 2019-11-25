@@ -59,7 +59,7 @@ public class YodafyClienteTCP {
 	    System.out.println("Recibido: \n" + bufferRecepcion);
 
 	
-	    // Una vez terminado el servicio, cerramos el socket (automáticamente se cierran
+	    // Una vez terminado el servicio, cerramos el socket
 
 	    outPrinter.close();
 	    inReader.close();

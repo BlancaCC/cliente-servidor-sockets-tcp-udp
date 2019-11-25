@@ -53,7 +53,7 @@ public class YodafyClienteUDP {
 		System.out.print((char)buferRecepcion[i]);
 	    }
 	    */		
-	    socket.close(); // cerramso la conexión
+	    socket.close(); // cerramos la conexión
 
 	// Excepciones:
 	} catch (UnknownHostException e) {
